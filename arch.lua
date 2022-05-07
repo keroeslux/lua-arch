@@ -27,7 +27,7 @@ function partition(drive)
       if part == "list" then
         os.execute("sudo lsblk /dev/"..drive)
       elseif part == "type" then
-        os.execute("vfat,\nntfs,\next4,\next3,\nxfs,\nbtrfs")
+        print("vfat,\nntfs,\next4,\next3,\nxfs,\nbtrfs")
       elseif part == "exit" then
         break
       else
@@ -37,6 +37,7 @@ function partition(drive)
   end
   reset(drive)
   partitions(drive)
+  formatting(drive)
 end
 print("NOTE THIS WILL ERASE ALL DATA")
 print("Enter the name of the drive you want to use (ls to show all drives): ")
