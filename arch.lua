@@ -11,6 +11,7 @@ function partition(drive)
         break
       elseif siz == "fill" then
         os.execute("sudo echo -e 'n\np\n\n\n\nw' | fdisk /dev/"..drive)
+        break
       end
       os.execute("sudo echo -e 'n\np\n\n\n"..siz.."\nw' | fdisk /dev/"..drive)
     end
