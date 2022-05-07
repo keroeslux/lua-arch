@@ -1,6 +1,7 @@
 function partition(drive)
   local reset = function(drive)
-    os.execute("sudo sfdisk --delete /dev/"..drive)
+    print("Wiping selected disk...")
+    os.execute("sudo sfdisk --delete /dev/"..drive.." > /dev/null")
   end
   local partitions = function(drive)
     local timer = true
@@ -11,8 +12,8 @@ function partition(drive)
         break
       elseif siz == "fill" then
         os.execute("sudo echo -e 'n\np\n\n\n\nw' | fdisk /dev/"..drive.." > /dev/null")
-      end
-      os.execute("sudo echo -e 'n\np\n\n\n"..siz.."\nw' | fdisk /dev/"..drive.." > /dev/null")
+      else
+        os.execute("sudo echo -e 'n\np\n\n\n"..siz.."\nw' | fdisk /dev/"..drive.." > /dev/null")
     end
   end
   local formatting = function(drive)
