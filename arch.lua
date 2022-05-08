@@ -28,6 +28,7 @@ function prechroot(drive)
     elseif part == "type" then
       print("vfat, \nntfs, \next4, \next3, \nxfs, \nbtrfs")
       goto perp
+    end
     print("\nEnter the fs format to use: ")
     local typ = io.read()
     local timer = true
@@ -39,7 +40,6 @@ function prechroot(drive)
       end
     end
   end
-end
   reset(drive)
   partitions(drive)
   formatting(drive)
