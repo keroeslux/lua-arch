@@ -40,10 +40,32 @@ function prechroot(drive)
       end
     end
   end
+  local final = function()
+    print("Enter the partition to mount to /mnt: ")
+    local mnt = io.read()
+    os.execute("sudo mount /dev/"..mnt.." /mnt")
+    :: kern :: print("Which kernel do you want? (list to show all): ")
+    local kernel = io.read()
+    if kernel == "list" then
+      print("linux,\nlinux-lts,\nlinux-zen")
+      goto kern
+    end
+    os.execute("pacstrap /mnt base "..kernel.." linux-firmware")
+    os.execute("genfstab -U /mnt >> /mnt/etc/fstab")
+  end
   reset(drive)
   partitions(drive)
   formatting(drive)
+  final()
 end
+--[[
+      WIP (MAY BREAK)
+]]--
+local runChroot = function()
+  os.execute("arch-chroot /mnt wget")
+end
+
+
 print("NOTE THIS WILL ERASE ALL DATA")
 local timer = true
 
