@@ -12,6 +12,7 @@ function prechroot(drive)
         break
       elseif siz == "fill" then
         os.execute("sudo echo -e 'n\np\n\n\n\nw' | fdisk /dev/"..drive.." > /dev/null")
+        timer = false
         break
       else
         os.execute("sudo echo -e 'n\np\n\n\n"..siz.."\nw' | fdisk /dev/"..drive.." > /dev/null")
@@ -19,9 +20,9 @@ function prechroot(drive)
     end
   end
   local formatting = function(drive)
-    print("Enter the partition to format (list to show all partitions | type to show all supported fs formats | exit to finish): ")
+    print("\nEnter the partition to format (list to show all partitions | type to show all supported fs formats | exit to finish): ")
     local part = io.read()
-    print("Enter the fs format to use: ")
+    print("\nEnter the fs format to use: ")
     local typ = io.read()
     local timer = true
     while timer == true do
@@ -32,8 +33,7 @@ function prechroot(drive)
       elseif part == "exit" then
         break
       else
-        os.execute("mkfs."..typ.." /dev/"..drive.."/"..part)
-        break
+        os.execute("mkfs."..typ.." /dev/"..part)
       end
     end
   end
