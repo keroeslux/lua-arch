@@ -1,4 +1,4 @@
-function partition(drive)
+function prechroot(drive)
   local reset = function(drive)
     print("Wiping selected disk...")
     os.execute("sudo sfdisk --delete /dev/"..drive.." > /dev/null")
@@ -46,9 +46,12 @@ local timer = true
 
 while timer == true do
   :: printing :: print("Enter the name of the drive you want to use (ls for a list of them): ")
-  local drive = io.read()
+  drive = io.read()
   if drive == "ls" then
     os.execute("lsblk")
     goto printing
+  else
+    break
   end
 end
+prechroot(drive)
