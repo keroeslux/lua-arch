@@ -1,3 +1,4 @@
+
 function partition(drive)
   local reset = function(drive)
     print("Wiping selected disk...")
