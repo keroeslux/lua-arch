@@ -1,4 +1,3 @@
-
 function partition(drive)
   local reset = function(drive)
     print("Wiping selected disk...")
@@ -13,6 +12,7 @@ function partition(drive)
         break
       elseif siz == "fill" then
         os.execute("sudo echo -e 'n\np\n\n\n\nw' | fdisk /dev/"..drive.." > /dev/null")
+        break
       else
         os.execute("sudo echo -e 'n\np\n\n\n"..siz.."\nw' | fdisk /dev/"..drive.." > /dev/null")
       end
@@ -33,6 +33,7 @@ function partition(drive)
         break
       else
         os.execute("mkfs."..typ.." /dev/"..drive.."/"..part)
+        break
       end
     end
   end
@@ -42,10 +43,11 @@ function partition(drive)
 end
 print("NOTE THIS WILL ERASE ALL DATA")
 print("Enter the name of the drive you want to use (ls to show all drives): ")
-local drive = io.read()
-if drive == "ls" then
-  os.execute("lsblk")
-  partition(drive)
-else
-  partition(drive)
+local timer = true
+
+while timer == true do
+  local drive = io.read()
+  if drive == "ls" then
+    os.execute("lsblk")
+  end
 end
