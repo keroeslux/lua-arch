@@ -42,12 +42,13 @@ function partition(drive)
   formatting(drive)
 end
 print("NOTE THIS WILL ERASE ALL DATA")
-print("Enter the name of the drive you want to use (ls to show all drives): ")
 local timer = true
 
 while timer == true do
+  :: printing :: print("Enter the name of the drive you want to use (ls for a list of them): ")
   local drive = io.read()
   if drive == "ls" then
     os.execute("lsblk")
+    goto printing
   end
 end
