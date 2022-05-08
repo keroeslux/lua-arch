@@ -20,17 +20,18 @@ function prechroot(drive)
     end
   end
   local formatting = function(drive)
-    print("\nEnter the partition to format (list to show all partitions | type to show all supported fs formats | exit to finish): ")
+    :: perp :: print("\nEnter the partition to format (list to show all partitions | type to show all supported fs formats | exit to finish): ")
     local part = io.read()
+    if part == "list" then
+      os.execute("sudo lsblk /dev/"..drive)
+      goto perp
+    elseif part == "type" then
+      print("vfat, \nntfs, \next4, \next3, \nxfs, \nbtrfs")
     print("\nEnter the fs format to use: ")
     local typ = io.read()
     local timer = true
     while timer == true do
-      if part == "list" then
-        os.execute("sudo lsblk /dev/"..drive)
-      elseif part == "type" then
-        print("vfat,\nntfs,\next4,\next3,\nxfs,\nbtrfs")
-      elseif part == "exit" then
+      if part == "exit" then
         break
       else
         os.execute("mkfs."..typ.." /dev/"..part)
