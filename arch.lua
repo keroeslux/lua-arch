@@ -38,6 +38,7 @@ function prechroot(drive)
       end
     end
   end
+end
   reset(drive)
   partitions(drive)
   formatting(drive)
