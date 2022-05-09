@@ -98,3 +98,4 @@ local postchroot = function()
   desktopSetup()
 
 end
+postchroot()
