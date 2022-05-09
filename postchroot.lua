@@ -1,5 +1,27 @@
 local environmentSetup = function(dewm)
-  local
+  local plasma = function()
+    os.execute("pacman -S xorg plasma plasma-wayland-session kde-applications --noconfirm > /dev/null")
+    os.execute("systemctl enable sddm.service")
+  end
+  local gnome = function()
+    os.execute("pacman -S gnome --noconfirm > /dev/null")
+    os.execute("systemctl enable gdm")
+  end
+  local xfce = function()
+    os.execute("pacman -S xfce4 xfce4-goodies --noconfirm > /dev/null")
+    os.execute("systemctl enable sddm.service")
+  end
+
+  if dewm == "xfce" then
+    xfce()
+  elseif dewm == "gnome" then
+    gnome()
+  elseif dewm == "kde" then
+    plasma()
+  else
+    print("Error while installing drive.")
+  end
+end
 
 
 
@@ -44,7 +66,7 @@ local postchroot = function()
       os.execute("grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi > /dev/null")
       os.execute("grub-mkconfig -o /boot/grub/grub.cfg")
     else
-      os.execute("grub-install --recheck /dev/"..drive)
+      os.execute("grub-install /dev/"..drive)
     end
     os.execute("systemctl enable NetworkManager")
   end
@@ -65,5 +87,14 @@ local postchroot = function()
     userSetup()
     local desktop = function()
       print("Enter the DE/WM you want to use (server for server)")
+      local dewm = io.read()
+      environmentSetup(dewm)
+    end
+    desktop()
   end
+  init()
+  userSet()
+  bootSet()
+  desktopSetup()
+
 end
