@@ -1,3 +1,8 @@
+local runChroot = function()
+  os.execute("arch-chroot /mnt wget https://raw.githubusercontent.com/keroeslux/lua-arch/main/postchroot.lua")
+  os.execute("arch-chroot /mnt lua postchroot.lua")
+end
+
 function prechroot(drive)
   local reset = function(drive)
     print("Wiping selected disk...")
@@ -65,11 +70,6 @@ end
 --[[
       WIP (MAY BREAK)
 ]]--
-local runChroot = function()
-  os.execute("arch-chroot /mnt wget https://raw.githubusercontent.com/keroeslux/lua-arch/main/postchroot.lua")
-  os.execute("arch-chroot /mnt lua postchroot.lua")
-end
-
 
 print("NOTE THIS WILL ERASE ALL DATA")
 local timer = true
