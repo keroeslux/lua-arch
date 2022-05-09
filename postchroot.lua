@@ -1,13 +1,16 @@
 local environmentSetup = function(dewm)
   local plasma = function()
+    print("installing kde, might take a bit...")
     os.execute("pacman -S xorg plasma plasma-wayland-session kde-applications --noconfirm > /dev/null")
     os.execute("systemctl enable sddm.service")
   end
   local gnome = function()
+    print("installing gnome, might take a bit...")
     os.execute("pacman -S gnome --noconfirm > /dev/null")
     os.execute("systemctl enable gdm")
   end
   local xfce = function()
+    print("installing xfce, might take a bit...")
     os.execute("pacman -S xfce4 xfce4-goodies --noconfirm > /dev/null")
     os.execute("systemctl enable sddm.service")
   end
