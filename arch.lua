@@ -35,6 +35,8 @@ function prechroot(drive)
     while timer == true do
       if part == "exit" then
         break
+      elseif typ == "exit" then
+        break
       else
         os.execute("mkfs."..typ.." /dev/"..part)
         goto perp
@@ -63,7 +65,8 @@ end
       WIP (MAY BREAK)
 ]]--
 local runChroot = function()
-  os.execute("arch-chroot /mnt wget")
+  os.execute("arch-chroot /mnt wget https://raw.githubusercontent.com/keroeslux/lua-arch/main/postchroot.lua")
+  os.execute("arch-chroot /mnt lua postchroot.lua")
 end
 
 
