@@ -37,6 +37,7 @@ function prechroot(drive)
         break
       else
         os.execute("mkfs."..typ.." /dev/"..part)
+        goto perp
       end
     end
   end
