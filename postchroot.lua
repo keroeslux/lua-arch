@@ -1,3 +1,8 @@
+local environmentSetup = function(dewm)
+  local
+
+
+
 local postchroot = function()
   local init = function()
     print("Enter your timezone (e.g. Canada/Central): ")
