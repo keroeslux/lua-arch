@@ -60,6 +60,7 @@ function prechroot(drive)
   partitions(drive)
   formatting(drive)
   final()
+  runChroot()
 end
 --[[
       WIP (MAY BREAK)
