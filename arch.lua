@@ -1,5 +1,5 @@
 local runChroot = function()
-  os.execute("pacman -S lua wget --noconfirm")
+  os.execute("arch-chroot /mnt pacman -S lua wget --noconfirm")
   os.execute("arch-chroot /mnt wget https://raw.githubusercontent.com/keroeslux/lua-arch/main/postchroot.lua")
   os.execute("arch-chroot /mnt lua postchroot.lua")
 end
