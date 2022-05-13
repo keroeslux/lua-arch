@@ -1,26 +1,42 @@
 local environmentSetup = function(dewm)
   local plasma = function()
-    print("installing kde, might take a bit...")
+    print("installing kde desktop environment, might take a while...")
     os.execute("pacman -S xorg plasma plasma-wayland-session kde-applications --noconfirm > /dev/null")
     os.execute("systemctl enable sddm.service")
   end
   local gnome = function()
-    print("installing gnome, might take a bit...")
+    print("installing gnome desktop environment, might take a while...")
     os.execute("pacman -S gnome --noconfirm > /dev/null")
     os.execute("systemctl enable gdm")
   end
   local xfce = function()
-    print("installing xfce, might take a bit...")
+    print("installing xfce desktop environment, might take a while...")
     os.execute("pacman -S xfce4 xfce4-goodies --noconfirm > /dev/null")
     os.execute("systemctl enable sddm.service")
   end
-
+  local cinnamon = function()
+    print("installing cinnamon desktop environment, might take a while...")
+    os.execute("pacman -S cinnamon gnome-terminal --noconfirm > /dev/null")
+  local dwm = function()
+    os.execute("pacman -S --noconfirm xorg-xinit xorg git base-devel networkmanager")
+    os.execute("cd /usr/src")
+    os.execute("git clone git://git.suckless.org/dwm")
+    os.execute("git clone git://git.suckless.org/st")
+    os.execute("git clone git://git.suckless.org/dmenu")
+    os.execute("systemctl enable NetworkManager.service")
+    os.execute("cd dwm && make clean install && cd .. && cd st && make clean install && cd .. && cd dmenu && make clean install")
+    print("Install my personal settings? y\n")
+    local br = io.read()
+    if br == "y" then
+      os.execute("pacman -S feh dunst libnotify pulseaudio pulseaudio-bluetooth arandr alacritty")
   if dewm == "xfce" then
     xfce()
   elseif dewm == "gnome" then
     gnome()
   elseif dewm == "kde" then
     plasma()
+  elseif dewm == "dwm" then
+    dwm()
   else
     print("Error while installing drive.")
   end
