@@ -17,6 +17,7 @@ local environmentSetup = function(dewm)
   local cinnamon = function()
     print("installing cinnamon desktop environment, might take a while...")
     os.execute("pacman -S cinnamon gnome-terminal --noconfirm > /dev/null")
+  end
   local dwm = function()
     os.execute("pacman -S --noconfirm xorg-xinit xorg git base-devel networkmanager")
     os.execute("cd /usr/src")
@@ -29,6 +30,8 @@ local environmentSetup = function(dewm)
     local br = io.read()
     if br == "y" then
       os.execute("pacman -S feh dunst libnotify pulseaudio pulseaudio-bluetooth arandr alacritty")
+    end
+  end
   if dewm == "xfce" then
     xfce()
   elseif dewm == "gnome" then
